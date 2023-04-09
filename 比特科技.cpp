@@ -1911,7 +1911,7 @@
 //    while (*str1 != ' ' &&* str1 != '\0')
 //        str1++;
 //    if (*str1 == ' ' && *str1 != '\0')
-//    {
+//    { 
 //        str1 += 1;
 //        str2 = str1;
 //    }
@@ -1925,3 +1925,140 @@
 //    return 0;
 //}
 
+
+/*有一种兔子，从出生后第3个月起每个月都生一只兔子，小兔子长到第三个月后每个月又生一只兔子。
+例子：假设一只兔子第3个月出生，那么它第5个月开始会每个月生一只兔子。
+一月的时候有一只兔子，假如兔子都不死，问第n个月的兔子总数为多少？*/
+
+//int fib(int n)
+//{
+//    if (n == 1)
+//        return 1;
+//    else if (n == 2)
+//        return 1;
+//    else
+//        return fib(n - 1) + fib(n - 2);
+//}
+//
+//int main() {
+//    //斐波那契数
+//    int n = 1;
+//    scanf("%d", &n);
+//    printf("%d", fib(n));
+//    return 0;
+//}
+
+/*
+1       1                                              1    1  
+                                                       2    1
+3       1             +           1                    3    2
+4       1+       1    +           1                    4    3
+5       1+    1+ 1    +           1   +1               5    5
+6       1+1+  1+ 1+ 1 +           1+1 +1               6    8
+
+*/
+
+
+/*数列的定义如下：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。
+输入描述：
+输入数据有多组，每组占一行，由两个整数n（n<10000）和m(m<1000)组成，n和m的含义如前所述。
+输出描述：
+对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。*/
+
+//double sum(double m, int n)
+//{
+//    double sum = m;
+//    while (n-->1)
+//    {
+//        m = sqrt(m);
+//        sum += m;
+//    }
+//    return sum;
+//}
+//int main()
+//{
+//    double m; int n;
+//    while (scanf("%lf %d", &m, &n) != EOF)
+//        printf("%.2lf\n", sum(m, n));
+//
+//    return 0;
+//}
+
+
+//int main() 
+//{
+//   /* *(pa++) *= 3;
+//    b =*( pa++);
+//    b = b * 3;*/
+//    return 0;
+//}
+
+
+
+
+/*杨氏矩阵查找某个数是否存在*/
+
+//int find(int arr[][3], int* x, int* y, int k)
+//{
+//    int m = 0;
+//    int n=*y-1;
+//    while (m < 3 && n >= 0)
+//    {
+//        if (arr[m][n] > k)
+//            n--;
+//        else if (arr[m][n] < k)
+//            m++;
+//        else
+//        {
+//            *x = m; *y = n;
+//            return 1;
+//        }
+//    }
+//}
+//int main()
+//{
+//    int arr[][3] = { 1,2,3,4,5,6,7,8,9 };
+//    int k=7;
+//    int x = 3; int y = 3;
+//   int ret= find(arr, &x, &y, k);
+//   if (ret == 1)
+//   {
+//       printf("找到了，下标为：%d,%d", x, y);
+//   }
+//   else
+//   {
+//       printf("没找到");
+//   }
+//    return 0;
+//}
+
+/*实现一个函数，可以左旋字符串中的k个字符。
+例如：
+ABCD左旋一个字符得到BCDA
+ABCD左旋两个字符得到CDAB
+ABCD左旋三个字符得到DABC*/
+
+//int main()
+//{
+//    int k = 0;
+//    char str[100];
+//    while (~scanf("%d", &k)) 
+//    {
+//        getchar();
+//            scanf("%[^\n]",str);
+//        int sz = strlen(str);
+//        for (int i = 0; i < k; i++)
+//        {
+//            char tmp = str[0];
+//            for (int j = 0; j < sz - 1; j++)
+//            {
+//                str[j] = str[j + 1];
+//            }
+//            str[sz - 1] = tmp;
+//        }
+//        printf("%s\n", str);
+//    }
+//    return 0;
+//}
+
+//使用回调函数，模拟实现q_sort（采用冒泡的方式）
