@@ -2014,6 +2014,7 @@
 //            return 1;
 //        }
 //    }
+//    return 0;
 //}
 //int main()
 //{
@@ -2047,7 +2048,7 @@ ABCD左旋三个字符得到DABC*/
 //        getchar();
 //            scanf("%[^\n]",str);
 //        int sz = strlen(str);
-//        for (int i = 0; i < k; i++)
+//        for (int i = 0; i < k%sz; i++)
 //        {
 //            char tmp = str[0];
 //            for (int j = 0; j < sz - 1; j++)
@@ -2062,3 +2063,132 @@ ABCD左旋三个字符得到DABC*/
 //}
 
 //使用回调函数，模拟实现q_sort（采用冒泡的方式）
+
+/*找一串数中出现次数为奇数的数*/
+//int main()
+//{
+//    int n = 0;
+//    scanf("%d", &n);
+//    int num = 0; int tmp = 0;
+//    while (n--)
+//    {
+//        scanf("%d", &tmp);
+//        num ^= tmp;
+//    }
+//    printf("%d", num);
+//    return 0;
+//}
+
+
+/*模仿qsort的功能实现一个通用的冒泡排序*/
+//int cmp(const void* e1, const void* e2) 
+//{
+//    return *(int*)e1-*(int*)e2;
+//}
+//struct stu
+//{
+//    char name[20];
+//    int age;
+//    double sorce;
+//}arr[3];
+//int cmp_stu_by_name(const void* e1, const void* e2)
+//{
+//    return strcmp(((struct stu*)e1)->name,((struct stu*)e2)->name);
+//}
+//void swap(char* buf1, char* buf2, int n)
+//{
+//    while (n--)
+//    {
+//        char tmp = *buf1;
+//        *buf1 = *buf2;
+//        *buf2 = tmp;
+//        buf1++;
+//        buf2++;
+//    }
+//}
+//void bubble_sort(void* base, int num, int width,int (*p)(const void* e1, const void* e2))
+//{
+//    int i = 0;
+//    for (i = 0; i < num-1; i++)
+//    {
+//        for (int j = 0; j < num - 1 - i; j++)
+//        {
+//            if (p((char*)base + j * width,(char*) base + (j + 1) * width) > 0)
+//                swap((char*)base + j * width, (char*)base + (j + 1) * width,width);
+//        }
+//    }
+//}
+////void print(int* arr,int n)
+////{for(int i=0;i<n;i++)
+////{
+////    printf("%d ",arr[i]);
+////}
+////}
+//
+//void print(struct stu arr[3])
+//{
+//    struct stu*p=arr;
+//    
+//    for (int i = 0; i < 3; i++)
+//    {
+//        printf("%s ,%d ,%.2lf\n", (p+i)->name, (p+i)->age, (p+i)->sorce);
+//        //printf("%s,%d,%.2lf", arr.name ,arr.age, arr.sorce);
+//    }
+//}
+//
+//int main()
+//{
+//    //int arr[] = { 9,8,7,6,5,4,3,2,1,0 };
+//    stu  arr[3] = { {"zhangsan",18,44.4}, {"lisi",20,55.5} ,{"wangwu",19,45.6} };
+//    bubble_sort(arr, sizeof(arr) / sizeof(arr[0]), sizeof(arr[0]), cmp_stu_by_name);
+//    print(arr);
+//    return 0;
+//}
+
+
+/*写一个函数，判断一个字符串是否为另外一个字符串旋转之后的字符串。
+例如：给定s1 =AABCD和s2 = BCDAA，返回1
+给定s1=abcd和s2=ACBD，返回0.
+AABCD左旋一个字符得到ABCDA
+AABCD左旋两个字符得到BCDAA
+AABCD右旋一个字符得到DAABC*/
+
+//int main()
+//{
+//    char str1[100];
+//    scanf("%[^\n]", str1);
+//    getchar();
+//    char str2[100];
+//    scanf("%[^\n]", str2);
+//    getchar();
+//    int sz=strlen(str1);
+//    int n = sz;
+//    while (n!=0)
+//    {
+//        char tmp = str1[0];
+//        for (int i = 0; i < sz-1; i++)
+//        {
+//            str1[i]=str1[i+1];
+//        }
+//        str1[sz-1] = tmp;
+//        if (strcmp(str1, str2) == 0)
+//        {
+//            printf("%d", 1);
+//            break;
+//        }
+//        n--;
+//    }if (n == 0)printf("%d", 0);
+//    return 0;
+//}
+//
+//int main()
+//{
+//   const char* c[] = { "ENTER","NEW","POINT","FIRST" };
+//   const char** cp[] = { c + 3,c + 2,c + 1,c };
+//   const char*** cpp = cp;
+//   printf("%s\n", **++cpp);
+//   printf("%s\n", *-- * ++cpp + 3);
+//   printf("%s\n", *cpp[-2] + 3);
+//   printf("%s", cpp[-1][-1]+1);
+//    return 0;
+//}
