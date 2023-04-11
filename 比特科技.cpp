@@ -2192,3 +2192,194 @@ AABCD右旋一个字符得到DAABC*/
 //   printf("%s", cpp[-1][-1]+1);
 //    return 0;
 //}
+
+
+/*模拟实现strstr*/
+
+//char* my_strstr(const char* str1, const char* str2)
+//{
+//    const char* s1 = str1;
+//    const char* s2 = str2;
+//    const char* cur = str1;
+//
+//    if (*s2 == '\0')
+//        return (char*)cur;
+//    while (*s1 != '\0')
+//    {
+//        while (*s1 != *s2 && *s1 != '\0' && *s2 != '\0')
+//        {
+//            s1++;
+//        }
+//        cur = s1;
+//        while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+//        {
+//            s1++;
+//            s2++;
+//        }
+//        if (*s2 == '\0')
+//        {
+//            return (char*)cur;
+//        }
+//        else
+//        {
+//            if (*s1 != '\0')
+//            {
+//                s1 = cur + 1;
+//                s2 = str2;
+//            }
+//        }
+//    }
+//    return NULL;
+//}
+//int main()
+//{
+//    char arr1[] = "abbbcdef";
+//    char arr2[] = "bc";
+//    char* len = my_strstr(arr1, arr2);
+//        if (len == NULL) 
+//        {
+//            printf("找不到");
+//        }
+//        printf("%s", my_strstr(arr1, arr2));
+//    return 0;
+//}
+
+/*模拟实现strcat*/
+
+//char*my_strcat(char*str1,const char*str2)
+//{
+//    char* ret = str1;
+//    while (*str1 != '\0')
+//        str1++;
+//    while (*str1++ = *str2++ )
+//    {
+//        ;
+//    }
+//    return ret;
+//}
+//int main()
+//{
+//    char arr1[30] = "abbbcdef\0XXXXXXXXX";
+//    char arr2[] = "bc";
+//        printf("%s", my_strcat(arr1, arr2));
+//    return 0;
+//}
+
+/*模拟实现strcmp*/
+
+//int my_strcmp(const char*str1,const char*str2)
+//{
+//    while (*str1 == *str2)
+//    {
+//        if (*str1 != '\0')
+//        {
+//            str1++;
+//            str2++;
+//        }
+//        else
+//            return 0;
+//    }
+//    return *str1 - *str2;
+//}
+//int main()
+//{
+//    char arr1[] = "abbbcdeg";
+//    char arr2[] = "abbbcdef";
+//        printf("%d", my_strcmp(arr1, arr2));
+//    return 0;
+//}
+
+/*模拟实现strcpy*/
+//char*my_strcpy(char*str1,const char*str2)
+//{
+//    char* ret = str1;
+//    while (*str1++ = *str2++)
+//        ;
+//    return ret;
+//}
+//int main()
+//{
+//    char arr1[20] = "qw";
+//    char arr2[] = "abbbcdef";
+//        printf("%s", my_strcpy(arr1, arr2));
+//    return 0;
+//}
+
+/*模拟实现strlen*/
+//size_t my_strlen(const char* str)
+//{
+//    int count = 0;
+//    if (*str == '\0')
+//    {
+//        return 0;
+//    }
+//    while (*str != 0)
+//    {
+//        str++;
+//        count++;
+//    }
+//    return count;
+//}
+//int main()
+//{
+//    char arr[] = "hfisu";
+//   printf("%d", my_strlen(arr));
+//    return 0;
+//}
+
+/*模拟实现memmove*/
+//void* my_memmove(void* dest, const void* src, size_t count)
+//{
+//void* ret = dest;
+//    if (dest < src)
+//        //从前往后
+//    {
+//        while (count--)
+//        {
+//            *(char*)dest = *(char*)src;
+//            dest = (char*)dest + 1;
+//            src = (char*)src + 1;
+//        }
+//    }
+//    else
+//        //从后往前
+//    {
+//        while (count--)
+//        {
+//            *((char*)dest + count) = *((char*)src + count);
+//        }
+//    }
+//    return ret;
+//}
+//int main()
+//{
+//    int arr[] = { 1,2,3,4,5,6,7,8,9 };
+//    my_memmove(arr+2, arr , 20);
+//    for (int i = 0; i < 9; i++)
+//    {
+//        printf("%d ", arr[i]);
+//    }
+//    return 0;
+//}
+
+/*模拟实现memcpy*/
+#include<assert.h>
+void* my_memcpy(void* dest, const void* src, size_t count)
+{
+    assert(dest && src);
+    void* ret = dest;
+    while (count--)
+    {
+     *(char*)dest=*(char*)src   ;
+     src=(char*)src+1;
+     dest = (char*)dest + 1;
+    }
+    return ret;
+}
+int main()
+{
+    int arr1[] = { 1,2,3,4,5,6,7,8,9 };
+    int arr2[] = { 4,5,6,7,8 };
+    my_memcpy(arr1, arr2, 12);
+    return 0;
+}
