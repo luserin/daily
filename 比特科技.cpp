@@ -2145,7 +2145,6 @@ ABCD左旋三个字符得到DABC*/
 //    return 0;
 //}
 
-
 /*写一个函数，判断一个字符串是否为另外一个字符串旋转之后的字符串。
 例如：给定s1 =AABCD和s2 = BCDAA，返回1
 给定s1=abcd和s2=ACBD，返回0.
@@ -2364,22 +2363,148 @@ AABCD右旋一个字符得到DAABC*/
 
 /*模拟实现memcpy*/
 #include<assert.h>
-void* my_memcpy(void* dest, const void* src, size_t count)
-{
-    assert(dest && src);
-    void* ret = dest;
-    while (count--)
-    {
-     *(char*)dest=*(char*)src   ;
-     src=(char*)src+1;
-     dest = (char*)dest + 1;
-    }
-    return ret;
-}
-int main()
-{
-    int arr1[] = { 1,2,3,4,5,6,7,8,9 };
-    int arr2[] = { 4,5,6,7,8 };
-    my_memcpy(arr1, arr2, 12);
-    return 0;
-}
+//void* my_memcpy(void* dest, const void* src, size_t count)
+//{
+//    assert(dest && src);
+//    void* ret = dest;
+//    while (count--)
+//    {
+//     *(char*)dest=*(char*)src   ;
+//     src=(char*)src+1;
+//     dest = (char*)dest + 1;
+//    }
+//    return ret;
+//}
+//int main()
+//{
+//    int arr1[] = { 1,2,3,4,5,6,7,8,9 };
+//    int arr2[] = { 4,5,6,7,8 };
+//    my_memcpy(arr1, arr2, 12);
+//    return 0;
+//}
+
+
+//int main()
+//{
+//    int* p = NULL;
+//    p = (int*)malloc(20);
+//    int*tmp=(int*)realloc(p, 30);
+//    p = tmp;
+//    tmp = NULL;
+//    free(p);
+//    p = NULL;
+//    return 0;
+//}
+
+/*模拟实现的strncat*/
+/*函数将str2的字符添加到str1后面，字符数为count，添加的第一个字符会覆盖str1最后的\0
+如果给定的count为5，但str2的第三位就为\0，那么函数会添加str2的第一个字符直到\0并包括\0的所有字符
+如果count比str2的长度大，那么只会将str2添加完
+返回的数组以\0结尾
+如果复制的行为发生在重叠的部分，这种行为未被定义(意思应该是自己添加在自己的后面)*/
+
+//char* my_strncat(char* dest, const char* source, size_t count)
+//{
+//    assert(dest && source);
+//    char*p = dest;
+//    while ((*p) != 0)
+//    {
+//        p++;
+//    }
+//    if (*p == 0)
+//    {
+//        while (count--)
+//        {
+//            if (*source == 0)
+//            {
+//                break;
+//            }
+//            *p = *source;
+//            p++; source++;
+//        }
+//    }
+//    if (*p != 0)
+//    {
+//        *p = 0;
+//    }
+//    return dest;
+//}
+//int main()
+//{
+//    char str[20] = "abcde";
+//    char str2[] = "zxc";
+//    my_strncat(str, str2, 2);
+//
+//    return 0;
+//}
+
+
+/*函数拷贝count个source的字符串到dest,从dest起始地址开始
+如果count比source的长度小，或者相等，那么只会拷贝相应个数的字符，不会自动添加\0
+如果count比source的长度大，在把source的所有字符串拷贝到dest后，剩余部分会补上\0，直到达到count
+source与dest有重叠这种行为未定义*/
+//char* my_strncpy(char* dest, const char* source, size_t count)
+//{
+//    assert(dest,source);
+//    char* p = dest;
+//    while (count--)
+//    {
+//        if (*source == 0)
+//            *p = 0;
+//        else
+//        {
+//            *p = *source;
+//            source++;
+//        }
+//        p++;
+//    }
+//    return dest;
+//}
+//int main()
+//{
+//    char str1[20] = "abcdexx";
+//    char str2 [] = "zxc";
+//    my_strncpy(str1, str2, 3);
+//    return 0;
+//}
+
+/*一个数组中只有两个数字是出现一次，其他所有数字都出现了两次。
+编写一个函数找出这两个只出现一次的数字。
+例如：
+有数组的元素是：1，2，3，4，5，1，2，3，4，6
+只有5和6只出现1次，要找出5和6.*/
+
+//void find_single(int* arr,int sz)
+//{
+//    //所有元素异或
+//    int ret = 0;
+//    int pos = 0;
+//    int single1 = 0; int single2 = 0;
+//    for (int i = 0; i < sz; i++)
+//    {
+//        ret^=*(arr+i);
+//    }
+//    //对异或得到的数字判断其二进制位哪一位为1
+//    for (int i = 0; i < 32; i++)
+//    {
+//        if (((ret >> i) & 1) == 1)
+//        {
+//            pos = i;
+//            break;
+//        }
+//    }
+//    for (int i = 0; i < sz; i++)
+//    {
+//        if ((((*(arr + i)) >> pos) & 1) == 1)
+//            single1 ^= *(arr + i);
+//    }
+//    single2 = ret ^ single1;
+//    printf("%d %d", single1, single2);
+//}
+//int main()
+//{
+//    int  arr[] = { 1,2,3,4,5,1,2,3,4,6 };
+//    int sz=sizeof(arr) / sizeof(arr[0]);
+//    find_single(arr,sz);
+//    return 0;
+//}
