@@ -2514,31 +2514,300 @@ source与dest有重叠这种行为未定义*/
 溢出的情况其返回值未定义
 遇到无法被识别为数字的字符时，函数就会停止继续解释
 当然，这个字符也有可能是字符串的终止字符\0
-该函数无法识别小数或者指数*/
+该函数无法识别小数或者指2数*/
 /*字符1-9的ascii值是49-57*/
 
+/*字符串中存在+-号*/
+/*字符串中只有+-号*/
+/*假如存在溢出*/
+/*空指针，返回0*/
+/*空字符串，返回0*/
+/*只有0字符*/
+
+//enum Status { Valid, Invalid };
+//int g_nstatus = Valid;
+//long long atoint(const char* str, bool minus)
+//{
+//    long long num = 0;
+//    while (*str != '\0')
+//    {
+//        if (*str >= '0' && *str <= '9')//字符在'0'-'9'之间的情况
+//        {
+//            int flag = minus ? -1 : 1;//如果传过来的minus是1,即首字符为-，那么flag=-1,否则flag为1
+//            num = num * 10 + flag * (*str - '0');
+//            if ((!minus && num > INT_MAX) || (minus && num < INT_MIN))//判断正溢出和负溢出,minus表示是正数还是负数，
+//                //如果是正数并且大于INT_MAX或者如果是负数并且小于INT_MIN，则正溢出或负溢出
+//            {
+//                num = 0; break;
+//            }
+//            str++;
+//        }
+//        else//字符不在'0'-'9'之间的情况
+//        {
+//            num = 0;
+//            break;
+//        }
+//    }
+//    if (*str == '\0')//有三种情况会来到这里（1）遇到了\0，（2）溢出了，（3）遇到了不在字符0-9之间的字符。只有（1）才是正确的
+//    {
+//        g_nstatus = Valid;//标志符号表示有效
+//    }
+//    return num;
+//}
 //int my_atoi(const char* str)
 //{
-// const   char* p = str;
-// int ret = 0;
-//    //判断第一个字符是否为1-9，如果不是，直接返回0
-//    if(*p<49||*p>57)
-//        return 0 ;
-//    //从第一个字符开始依次向后判断，循环终止条件：
-//    //字符不在1-9内；
-//    while (*p >= 49 && *p <= 57)
+//    g_nstatus = Invalid;//标志符号表示无效
+//    long long num = 0;
+//    assert(str);
+//    if (str != NULL && *str != '\0')//指针非空并且第一个字符不是\0,如果是空字符串，那么第一个字符是\0，就不会进入语句
 //    {
-//        ret *= 10;
-//        ret += (*p-48);
-//        p++;
+//        //判断首字符是否为+-号
+//        bool minus = false;//minus=0
+//        if (*str == '+')//第一个字符是+，minus=0
+//        {
+//            str++;
+//        }
+//        else if (*str == '-')
+//        {
+//            str++;
+//            minus = true;//第一个字符是-，minus=1
+//        }
+//        if (*str != '\0')//如果有+-号，判断+-号之后的字符是不是\0，如果没有+-号，判断第一个字符是不是\0
+//        {
+//            num = atoint(str, minus);
+//        }
+//        return (int)num;
 //    }
-//    return ret;
 //}
 //int main()
 //{
 //    int i = 0;
-//    char p[] = "12131";
-//   i=my_atoi(p);
+//    char p[] = "";
+//   i=my_atoi(p);//按理说输入空字符串时，调用的函数根本没有返回值，为什么又返回了一个随机值呢。这里不理解！
+// /*关于返回随机值这里目前的猜想是因为在返回前存在long long类型的变量，返回的是那个变量在内存上后面第9-12个字节的数
+// 而函数本身就直接将那个数赋值给了变量i*/
+// /*但似乎实际上在此处引用函数之后，如果函数什么都不做似乎本身就会返回一个随机值，只是上面的变量提供了一个地址，
+// 而一般情况下如果没有这个变量的话应该是找不到地址的*/
 //   printf("%d", i);
 //   return 0;
+//}
+
+//int my_atoi(char* p)
+//{
+//    if (*p != 0)
+//    {
+//        return 0;
+//    }
+//}
+//int main()
+//{
+//    int i = 0;
+//    char p[] = "";
+//    i = my_atoi(p);
+//    printf("%d", i);
+//    return 0;
+//}
+
+/*给定两个数组 nums1 和 nums2 ，返回 它们的交集 。输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 。*/
+
+//int* intersection(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize) {
+//    static int arr[1000];
+//    *returnSize = 0;
+//    for (int i = 0; i < nums1Size; i++)
+//    {
+//        for (int j = 0; j < nums2Size; j++)
+//        {
+//            if (*(nums1 + i) == *(nums2 + j))
+//            {
+//                int k = 0;
+//                for (k = 0; k <* returnSize; k++)
+//                {
+//                    if (arr[k] == *(nums1 + i))
+//                        break;
+//                    else
+//                        ;
+//                }
+//                if (k == *returnSize)
+//                {
+//                    arr[*returnSize] = *(nums1 + i);
+//                    *returnSize += 1;
+//                }
+//            }
+//
+//        }
+//    }
+//    return arr;
+//}
+
+/*自除数 是指可以被它包含的每一位数整除的数。
+例如，128 是一个 自除数 ，因为 128 % 1 == 0，128 % 2 == 0，128 % 8 == 0。
+自除数 不允许包含 0 。
+给定两个整数 left 和 right ，返回一个列表，列表的元素是范围 [left, right] 内所有的 自除数 。
+/*
+  Note: The returned array must be malloced, assume caller calls free().
+ */
+
+//int* selfDividingNumbers(int left, int right, int* returnSize)
+//{
+//    int* arr = (int*)calloc(1000, sizeof(int));
+//    *returnSize = 0;
+//    for (int k = left; k <= right; k++)
+//    {
+//        int num = k;
+//        if (k < 10)
+//        {
+//            arr[*returnSize] = k;
+//            (*returnSize)++;
+//        }
+//        else
+//        {
+//            num = k;
+//            while (num != 0)
+//            {
+//                if (num % 10 == 0|| (k % (num % 10) != 0))
+//                {
+//                        break;
+//                }
+//                num /= 10;
+//            }
+//            if (num == 0)
+//            {
+//                arr[*returnSize] = k;
+//                (*returnSize)++;
+//            }
+//        }
+//    }
+//    return arr;
+//}
+
+/*给你一个整数数组 nums，返回 数组 answer ，其中 answer[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积 。
+题目数据 保证 数组 nums之中任意元素的全部前缀元素和后缀的乘积都在  32 位 整数范围内。
+请不要使用除法，且在 O(n) 时间复杂度内完成此题。*/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+/*对于这个题，我的猜想是先算出所有元素的乘积，然后模拟计算机的除法运算，这样应该是最方便的，不过目前太难实现，可以等后续*/
+/*另外有一种思想是将每个数的左半边的元素先乘起来存入返回数组的每个元素中，在将每个数的右半边的元素乘起来，再与
+之前已经存入的数相乘，就是结果了*/
+
+//int* productExceptSelf(int* nums, int numsSize, int* returnSize) {
+//    int* arr = (int*)malloc(numsSize * sizeof(int));
+//    *returnSize=numsSize;
+//    int left = 1; int right = 1;
+//    //先存入每个数的左半边的元素的乘积
+//    for (int i = 0; i < numsSize; i++)
+//    {
+//        arr[*returnSize] = left;
+//        left *= nums[i];
+//    }
+//    //每个元素中已经存入的左半边的乘积接下来就可以依次乘以其右半边的乘积了
+//    for (int i = numsSize-1; i >=0; i--)
+//    {
+//        arr[i] *= right;
+//        right *= nums[i];
+//    }
+//    return arr;
+//}
+
+
+/*给你一个含 n 个整数的数组 nums ，其中 nums[i] 在区间 [1, n] 内。请你找出所有在 [1, n] 范围内
+但没有出现在 nums 中的数字，并以数组的形式返回结果。*/
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+/*一个进阶的思想是将数组中出现的元素其绝对值作为下标的位置的元素值置为负值，对于出现多次的元素只操作一次，
+全部操作完成后，哪一个或哪几个位置上的元素仍为正数，则这个或这几个元素的下标就是在数组中没有出现的那些数，
+当然，由于数组的下标是从0开始的，首先0没法区分正负，其次，数组中的数其范围是1-n，而下标的范围是0-（n-1），
+下标与数值之间的关系是下标=数值-1，所以，假如元素中出现了一个数字1，那么应该将下标为0的元素置为负值，以此类推，
+最终剩下的元素为正数的下标再+1就是没有出现的数*/
+
+//int* findDisappearedNumbers(int* nums, int numsSize, int* returnSize) 
+//{
+//    int* arr = (int*)malloc(numsSize * sizeof(int));
+//    *returnSize = 0;
+//    for(int i=0;i<numsSize;i++)
+//    {      
+//        if (nums[abs(nums[i]) - 1] > 0)
+//            nums[abs(nums[i]) - 1] *= (-1);
+//    }
+//    for (int i = 0; i < numsSize; i++)
+//    {
+//        if (nums[i] > 0)
+//        {
+//            arr[*returnSize] =i+1;
+//           (*returnSize)++;
+//        }
+//    }
+//    return arr;
+//}
+
+
+/*珠玑妙算游戏（the game of master mind）的玩法如下。
+计算机有4个槽，每个槽放一个球，颜色可能是红色（R）、黄色（Y）、绿色（G）或蓝色（B）。例如，计算机可能有RGGB 4种
+（槽1为红色，槽2、3为绿色，槽4为蓝色）。作为用户，你试图猜出颜色组合。打个比方，你可能会猜YRGB。
+要是猜对某个槽的颜色，则算一次“猜中”；要是只猜对颜色但槽位猜错了，则算一次“伪猜中”。
+注意，“猜中”不能算入“伪猜中”。
+给定一种颜色组合solution和一个猜测guess，编写一个方法，返回猜中和伪猜中的次数answer，
+其中answer[0]为猜中的次数，answer[1]为伪猜中的次数。*/   
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+//int* masterMind(char* solution, char* guess, int* returnSize) {
+//    *returnSize = 2;
+//    int arr[2] = {0};
+//    arr[0] = 0; arr[1] = 0;//静态变量不会自动清零，这里每次重置了
+//    int s_arr[26] = { 0 };
+//    int g_arr[26] = { 0 };
+//    for(int i=0;i<4;i++)
+//    { //猜中的次数，只有两个数组对应坐标上的元素相等时才计入
+//        if (solution[i] == guess[i])
+//            arr[0]++;
+//        //伪猜中的次数,在这里利用is else实际上可以比较巧妙的解决假如存在一些重复元素的问题
+//        else
+//        {
+//            s_arr[solution[i] - 'A'] += 1;
+//            g_arr[guess[i] - 'A'] += 1;
+//        }
+//    }
+//    for (int i = 0; i < 26; i++)
+//    {
+//        arr[1] += s_arr[i] > g_arr[i] ? g_arr[i] : s_arr[i];
+//    }
+//    return arr;
+//}
+    
+
+//int* masterMind(char* solution, char* guess,int *arr) {
+//    int s_arr[26] = { 0 };//26个字符位 solution 四种颜色数量统计
+//    int g_arr[26] = { 0 };//26个字符位 guess 四种颜色数量统计
+//    for (int i = 0; i < 4; i++) {
+//        if (solution[i] == guess[i]) {
+//            *(arr+0) += 1;//位置和颜色完全一致则猜中数量+1
+//        }
+//        else {
+//            //统计同一位置不同颜色的两组颜色数量，伪猜中不需要对应位置相同，只需要有对应数量的颜色就行
+//            s_arr[solution[i] - 'A'] += 1; //统计solution对应颜色字符出现次数
+//            g_arr[guess[i] - 'A'] += 1;//统计guess对应颜色字符出现次数
+//        }
+//    }
+//    //在两个颜色数量统计数组中查看颜色数量，取相同位置较小的一方就是为猜中数量
+//    for (int i = 0; i < 26; i++) {
+//        *(arr+1) += s_arr[i] > g_arr[i] ? g_arr[i] :s_arr[i];
+//    }
+//    return arr;
+//}
+//int main()
+//{
+//    char solution[] = "RGBY";
+//    char guess[] = "GGRR";
+//    int arr[2] = {0};
+//    masterMind(solution, guess, arr);
+//    for (int i = 0; i < 2; i++)
+//    {
+//        printf("%d\n", arr[i]);
+//    }
+//    return 0;
+//
 //}
