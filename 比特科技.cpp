@@ -3007,3 +3007,215 @@ source与dest有重叠这种行为未定义*/
 //
 //    return 0;
 //}
+
+/*编写一个函数来查找字符串数组中的最长公共前缀。
+如果不存在公共前缀，返回空字符串 ""。
+输入：strs = ["flower","flow","flight"]
+输出："fl"
+输入：strs = ["dog","racecar","car"]
+输出：""
+解释：输入不存在公共前缀。*/
+
+
+//char* longestCommonPrefix(const char** strs, int strsSize) {
+// /*先求出数组有几列*/
+//    int rank = 1;
+//    const char* str = *strs;
+//    while((*str)!='\0')
+//    {
+//        (str)++;
+//        rank+=1;
+//    }
+//    /*算出数组有几行*/
+//    int row = strsSize / rank;
+//    /*定义两个指针，指针s1指向第一行的每一个元素，指针s2指向每一行的相同位置的元素*/
+//    const char* s1 = *strs;
+//    const char** s2 = strs;
+//    int count1 = 0;//count1记录有几列数相等
+//    for (int i = 0; i < rank; i++)
+//    {
+//        int count2 = 1;//count2记录有几行的相同列的元素是相等的
+//        for (int j = 1; j < row; j++)
+//        {
+//            if (*(*(s2 + j) + i) == *s1)
+//            {
+//                count2++;
+//            }
+//            else
+//            {
+//                break;
+//            }
+//        }
+//        if (count2 == row)
+//        {
+//            count1++;
+//            s1++;
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
+//    char arr[200] = { 0 };
+//    if(count1>0)
+//    {
+//        for (int i = 0; i < count1; i++)
+//        {
+//            arr[i] = *(*(strs+0)+i);
+//        }
+//    }
+//    return arr;
+//}
+
+/*上面的第一种在leetcode上不知道为什么运行不出来，有另一个办法，当字符不等的时候直接给该位置置0，返回这个数组就行了
+并且也省去了新开辟数组的空间*/
+/*现在我知道为什么运行不了了，leetcode上strsSize是数组的行数，草！*/
+/*好吧，我实在搞不清楚它给的strsSize是什么，导致总是在它上面运行错误，暂时放弃了，在这上面能运行就行*/
+//char* longestCommonPrefix( char** strs, int strsSize) {
+//    /*先求出数组有几列*/
+//    int rank = 1;
+//    const char* str = *strs;
+//    while ((*str) != '\0')
+//    {
+//        (str)++;
+//        rank += 1;
+//    }
+//    /*算出数组有几行*/
+//    int row = strsSize / rank;
+//    /*定义两个指针，指针s1指向第一行的每一个元素，指针s2指向每一行的相同位置的元素*/
+//    const char* s1 = *strs;
+//    const char** s2 = strs;
+//    int count1 = 0;//count1记录有几列数相等
+//    for (int i = 0; i < rank; i++)
+//    {
+//        int count2 = 1;//count2记录有几行的相同列的元素是相等的
+//        for (int j = 1; j < row; j++)
+//        {
+//            if (*(*(s2 + j) + i) == *s1)
+//            {
+//                count2++;
+//            }
+//            else
+//            {
+//                break;
+//            }
+//        }
+//        if (count2 == row)
+//        {
+//            count1++;
+//            s1++;
+//        }
+//        else
+//        {
+//            strs[0][i] = '\0';
+//        }
+//    }
+//    return strs[0];
+//}
+
+//char* longestCommonPrefix(const char** strs, int strsSize) {
+///*定义一个行值等于strsSize*/
+//    int row = strsSize;
+//    /*求出数组有几列，对各行扫描，找出最长的那一行，strlen求出字符串长度，再加再加上1就是列数*/
+//    int tmp = 0;
+//    for (int i = 0; i < row; i++)
+//    {
+//        if (tmp < strlen(strs[i]))
+//        {
+//            tmp = strlen(strs[i]);
+//        }
+//    }
+//    int rank = tmp + 1;
+//    /*算出数组有几行*/
+//    /*定义两个指针，指针s1指向第一行的每一个元素，指针s2指向每一行的相同位置的元素*/
+//    const char* s1 = *strs;
+//    const char** s2 = strs;
+//    int count1 = 0;//count1记录有几列数相等
+//    for (int i = 0; i < rank; i++)
+//    {
+//        int count2 = 1;//count2记录有几行的相同列的元素是相等的
+//        for (int j = 1; j < row; j++)
+//        {
+//            if (*(*(s2 + j) + i) == *s1)
+//            {
+//                count2++;
+//            }
+//            else
+//            {
+//                break;
+//            }
+//        }
+//        if (count2 == row)
+//        {
+//            count1++;
+//            s1++;
+//        }
+//      /*  else
+//        {
+//            strs[0][i] = '\0';
+//        }*/
+//    }
+//    char arr[20] = { 0 };
+//    return arr;
+//}
+
+/*leetcode通过版，莫名其妙就过了！*/
+
+//char* longestCommonPrefix(char** strs, int strsSize) {
+//    /*定义一个行值等于strsSize*/
+//    int row = strsSize;
+//    /*求出数组有几列，对各行扫描，找出最长的那一行，strlen求出字符串长度，再加上1就是列数*/
+//    int tmp = 0;
+//    for (int i = 0; i < row; i++)
+//    {
+//        if (tmp < strlen(strs[i]))
+//        {
+//            tmp = strlen(strs[i]);
+//        }
+//    }
+//    int rank = tmp + 1;
+//    /*定义两个指针，指针s1指向第一行的每一个元素，指针s2指向每一行的相同位置的元素*/
+//    const char* s1 = *strs;
+//    const char** s2 = strs;
+//    int count1 = 0;//count1记录有几列数相等
+//    int i = 0;
+//    for (i = 0; i < rank; i++)
+//    {
+//        int count2 = 0;//count2记录有几行的相同列的元素是相等的
+//        for (int j = 0; j < row; j++)
+//        {
+//            if (*(*(s2 + j) + i) == *s1)
+//            {
+//                count2++;
+//            }
+//            else
+//            {
+//                break;
+//            }
+//        }
+//        if (count2 == row)
+//        {
+//            count1++;
+//            s1++;
+//        }
+//        else
+//        {
+//            strs[0][i] = 0;
+//            break;
+//        }
+//    }
+//    return strs[0];
+//}
+
+//int main()
+//{
+//   const char* strs[] = {"flower", "flow", "flight"};/*这种类型的数组，表示数组有三个元素，每个元素并不是
+//   字符串数组本身，而是字符串首元素的地址，也就是整个数组的三个元素都是指针*/
+//   //printf("%d", sizeof();//因此，此处若想求出整个数组的大小应该是不行的，这里的大小指21而不是12.
+//   
+//   char* arr=longestCommonPrefix(strs, 3);
+//       printf("%s", arr);
+//   return 0;
+//}
+
+
