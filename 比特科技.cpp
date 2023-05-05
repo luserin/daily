@@ -3371,3 +3371,72 @@ source与dest有重叠这种行为未定义*/
 
 /*思路5：欧拉筛法（似乎时间复杂度可以达到O(N)），等更新！*/
 
+//int main()
+//{
+//    char p1[15] = "abcd";char p2 [] = "ABCD", str[50] = "xyz";
+//    strcpy(str + 2, strcat(p1 + 2, p2 + 1));
+//    printf("%s\n", strcat(p1 + 2, p2 + 1));
+//    printf("%s", str);
+//    return 0;
+//}
+
+/*为了证明环形链表当fast一次走多步追赶slow时，的确存在可能永远不会相遇的情况，创建了如下的代码
+进行测试*/
+
+//struct slist
+//{
+//    int val;
+//    struct slist* next;
+//};
+//int main()
+//{
+//    struct slist*p1=(struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p2 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p3 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p4 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p5 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p6 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p7 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p8 = (struct slist*)malloc(sizeof(struct slist));
+//    struct slist* p9 = (struct slist*)malloc(sizeof(struct slist));
+//    p1->next = p2; p2->next = p3; p3->next = p4; p4->next = p5; p5->next = p6; p6->next = p7;
+//    p7->next = p8; p8->next = p9; p9->next = p1;
+//    struct slist* fast = p2; struct slist* slow = p1;
+////count表示fast追上slow走了几次
+//    int count = 0;
+//    while (fast != slow)
+//    {
+//        count++;
+//        //此例中fast与slow的初始差距是8，如下，当fast一次走四步，也就是每次都比slow多走三步时，
+//        //fast永远都不会与slow相遇
+//        fast = fast->next->next->next->next; slow = slow->next;
+//    }
+//    printf("%d", count);
+//    free(p1);    free(p2);    free(p3);    free(p4);    free(p5);    free(p6);    free(p7);    free(p8);    free(p9);
+//    return 0;
+//}
+
+// 0000 0000 0000 0000 0000 0000 0000 1010  -------int 10
+// 0 00000000 000 0000 0000 0000 0000 1010  -------float
+//  (-1)^S*M*2^E-----------S=0,M=1010,E=0,
+// M=0.1010=0.5+0.125=0.625
+// 1*0.625*2^(-127)=0
+// 
+// float 10:
+//     (-1)^S*M*2^E
+//   (-1)^0*1.010*2^3
+//  S=0;M=010;E=3               S=0;M=010;E=127+3=130
+//  0 10000010 01000000000000000000000
+
+//int main()
+//{
+//    float a = 10;
+//    int* pi = (int*)&a;
+//    printf("%f\n",a);
+//    printf("%d\n", *pi);
+//    int b = 10;
+//    float* pf = (float*)&b;
+//    printf("%d\n", b);
+//    printf("%f\n", *pf);
+//    return 0;
+//}
